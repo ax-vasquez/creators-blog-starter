@@ -1,7 +1,18 @@
+require("dotenv").config({
+  path: `.env`,
+})
+
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
     title: "CreatorsBlog",
   },
-  plugins: [],
+  plugins: [
+    {
+      resolve: `gatsby-source-sanity`,
+      options: {
+        projectId: process.env.SANITY_PROJECT,
+        dataset: process.env.SANITY_DATASET,
+      },
+    },
+  ],
 };
