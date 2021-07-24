@@ -14,5 +14,6 @@ module.exports = {
         dataset: process.env.SANITY_DATASET,
       },
     },
+    `gatsby-plugin-postcss`
   ],
 };

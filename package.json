@@ -14,11 +14,15 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "autoprefixer": "^10.3.1",
     "gatsby": "^3.10.1",
     "gatsby-plugin-image": "^1.10.1",
+    "gatsby-plugin-postcss": "^4.10.0",
     "gatsby-source-sanity": "^7.0.7",
+    "postcss": "^8.3.6",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "tailwindcss": "^2.2.7"
   },
   "devDependencies": {
     "typescript": "^4.3.5"
