@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* To make VS code play nice with the @apply directive, install the PostCSS plugin (https://marketplace.visualstudio.com/items?itemName=csstools.postcss) */
+.layout {
+    @apply container;
+    @apply mx-auto;
+}
+
+.nav {
+    @apply overflow-hidden;
+    @apply sticky;
+    @apply bg-white;
+    @apply top-0;
+}
+
+.nav a {
+    @apply float-left;
+    @apply block;
+    @apply text-center;
+    @apply no-underline;
+}
+
+.home-header {
+    @apply h-full;
+    @apply w-full;
+}
+
+.home-header-image {
+    @apply block;
+    @apply ml-auto;
+    @apply mr-auto;
+}
