@@ -1,10 +1,27 @@
 import * as React from "react"
+import { Layout } from "../components/Layout"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { graphql } from "gatsby"
 
-const IndexPage = () => {
+export const query = graphql`
+query{
+  imageSharp(original: {src: {regex: "/nebula/"}}) {
+    gatsbyImageData(
+       placeholder: BLURRED
+       formats: [AUTO, WEBP, AVIF]
+     )
+  }
+}
+`
+
+const IndexPage = ({ data }) => {
+  const image = getImage(data.imageSharp)
   return (
-    <main>
-      <h1>Hello there</h1>
-    </main>
+    <Layout>
+        <div className="home-header">
+          <GatsbyImage image={image} alt="stars" className="home-header-image"/>
+        </div>
+    </Layout>
   )
 }
 

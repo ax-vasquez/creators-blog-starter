@@ -4,11 +4,15 @@ Just another Gatsby blog starter.
 
 ## To do
 1. [ ] Site layout and style
-2. [ ] Blog feed
+    * [ ] Search bar
+    * [ ] Header image (or carousel)
+2. [ ] Home page
+3. [ ] Blog feed
    * [ ] Article page
-3. [ ] Bio pages
-4. [ ] Project overview page
+4. [ ] Bio pages
+5. [ ] Project overview page
     * [ ] Project info modal
+6. [ ] 404 page
 
 ## In the future...
 1. **Documentation sub-system**

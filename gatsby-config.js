@@ -14,6 +14,25 @@ module.exports = {
         dataset: process.env.SANITY_DATASET,
       },
     },
-    `gatsby-plugin-postcss`
+    `gatsby-plugin-postcss`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images/`,
+      },
+    },
+    // see https://www.gatsbyjs.com/plugins/gatsby-plugin-image
+    `gatsby-plugin-image`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        // Defaults used for gatsbyImageData and StaticImage
+        defaults: {},
+        // Set to false to allow builds to continue on image errors
+        failOnError: true,
+      },
+    },
+    `gatsby-transformer-sharp`
   ],
 };
