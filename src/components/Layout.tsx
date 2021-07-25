@@ -1,16 +1,15 @@
 import React from 'react'
+import { Navbar } from './Navbar'
 
 export const Layout = (props) => {
     return (
-        <div className="layout">
-            <div id="nav" className="nav">
-                <ul>
-                    {[`Home`, `Blog`, `Projects`, `Guides`, `About`].map(topic => <li><a href="/">{topic}</a></li>)}
-                </ul>
+        <div>
+            <Navbar />
+            <div className="layout">
+                <main>
+                    {props.children}
+                </main>
             </div>
-            <main>
-                {props.children}
-            </main>
         </div>
     )   
 }

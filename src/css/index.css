@@ -11,8 +11,11 @@
 .nav {
     @apply overflow-hidden;
     @apply sticky;
-    @apply bg-white;
+    @apply bg-gray-100;
     @apply top-0;
+    @apply w-screen;
+    @apply z-10;
+    @apply shadow;
 }
 
 .nav a {
@@ -22,13 +25,38 @@
     @apply no-underline;
 }
 
+.nav ul {
+    @apply mt-2 mb-2;
+    @apply ml-5;
+    @apply inline-block;
+}
+
+.nav li {
+    @apply mx-2;
+    @apply p-2;
+    @apply bg-gray-300 hover:bg-gray-400;
+    @apply rounded;
+    @apply text-gray-600 hover:text-gray-800;
+    @apply inline-block;
+}
+
+.nav-search-icon {
+    @apply inline-block;
+    @apply float-right;
+    @apply mr-5;
+    @apply relative;
+    @apply transform translate-y-1/2;
+    @apply hover:text-red-400;
+}
+
 .home-header {
     @apply h-full;
     @apply w-full;
 }
 
-.home-header-image {
+.hero-image {
     @apply block;
     @apply ml-auto;
     @apply mr-auto;
+    @apply h-80;
 }
