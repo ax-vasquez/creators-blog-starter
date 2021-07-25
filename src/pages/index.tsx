@@ -19,7 +19,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
         <div className="home-header">
-          <GatsbyImage image={image} alt="stars" className="home-header-image"/>
+          <GatsbyImage image={image} alt="stars" className="hero-image"/>
         </div>
     </Layout>
   )
