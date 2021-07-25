@@ -1,7 +1,8 @@
 import * as React from "react"
 import { Layout } from "../components/Layout"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { graphql } from "gatsby"
+import { Tile } from "../components/home/Tile"
 
 export const query = graphql`
 query{
@@ -11,16 +12,43 @@ query{
        formats: [AUTO, WEBP, AVIF]
      )
   }
+  allImageSharp(filter: {original: {src: {regex: "/tile/"}}}) {
+    edges {
+      node {
+        original {
+          src
+        }
+        gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+      }
+    }
+  }
 }
 `
 
 const IndexPage = ({ data }) => {
-  const image = getImage(data.imageSharp)
+  const heroImage = getImage(data.imageSharp)
+  const tileImagesData = data.allImageSharp.edges.map(tileImageData => {
+    return {
+      src: tileImageData.node.original.src,
+      imageData: tileImageData.node.gatsbyImageData
+    }
+  }) as { src: string, imageData: IGatsbyImageData }[]
   return (
     <Layout>
-        <div className="home-header">
-          <GatsbyImage image={image} alt="stars" className="hero-image"/>
-        </div>
+        <GatsbyImage image={heroImage} alt="stars" className="hero-image"/>
+        <body>
+          <h1 className="home-greeting-title">Hello, I'm Armando</h1>
+          <p className="home-greeting">
+            Welcome to my headspace! I use this site as my personal blog, as well as my professional portfolio. I'll also occasionally
+            write some guides on a variety of topics I'm interested in, such as coding, 3D modeling (and animating), video games, modding,
+            and whatever else I may end up dabbling in.
+          </p>
+          <div className="home-tile-grid">
+            {tileImagesData.map(img => <Tile src={img.src} imageData={img.imageData} />)}
+          </div>
+          
+        </body>
+
     </Layout>
   )
 }
