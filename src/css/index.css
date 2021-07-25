@@ -49,14 +49,50 @@
     @apply hover:text-red-400;
 }
 
-.home-header {
-    @apply h-full;
-    @apply w-full;
-}
-
 .hero-image {
     @apply block;
     @apply ml-auto;
     @apply mr-auto;
     @apply h-80;
+}
+
+.home-header {
+    @apply h-full;
+    @apply w-full;
+}
+
+.home-tile-grid {
+    @apply grid grid-flow-row justify-items-center justify-center ;
+    @apply lg:grid-flow-col gap-y-2 gap-x-10;
+}
+.home-tile {
+    @apply relative;
+}
+.home-tile-image {
+    @apply h-60 w-60;
+    @apply block;
+}
+.home-tile-overlay {
+    @apply absolute flex items-center justify-center;
+    @apply bottom-0;
+    @apply bg-black bg-opacity-75 hover:bg-opacity-50;
+    @apply h-60 w-60;
+    @apply text-gray-300 text-3xl;
+}
+
+.home-greeting-title {
+    @apply text-center;
+    @apply mt-12 mb-6;
+}
+.home-greeting {
+    @apply w-9/12;
+    @apply text-lg;
+    @apply text-justify;
+    @apply mx-auto mb-6;
+}
+
+h1 {
+    @apply text-5xl;
+    @apply font-sans;
+    @apply text-gray-700;
 }
