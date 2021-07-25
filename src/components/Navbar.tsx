@@ -1,5 +1,6 @@
 import React from 'react'
 import { BiSearchAlt } from '@react-icons/all-files/bi/BiSearchAlt'
+import { Link } from "gatsby"
 
 type NavOptionData = {
     [key: string]: {
@@ -15,26 +16,26 @@ const OPTIONS = {
     },
     blog: {
         label: `Blog`,
-        url: `/`
+        url: `/blog`
     },
     projects: {
         label: `Projects`,
-        url: `/`
+        url: `/projects`
     },
     guides: {
         label: `Guides`,
-        url: `/`
+        url: `/guides`
     },
     about: {
         label: `About`,
-        url: `/`
+        url: `/about`
     },
 } as NavOptionData
 
 export const Navbar = () => (
     <div id="nav" className="nav">
         <ul>
-            {Object.keys(OPTIONS).map(option => <li><a href={OPTIONS[option].url}>{OPTIONS[option].label}</a></li>)}
+            {Object.keys(OPTIONS).map(option => <li><Link to={OPTIONS[option].url}>{OPTIONS[option].label}</Link></li>)}
         </ul>
         <BiSearchAlt className="nav-search-icon" size={30}/>
     </div>
