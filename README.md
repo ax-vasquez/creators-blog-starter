@@ -20,3 +20,8 @@ Just another Gatsby blog starter.
 2. **Shoutouts**
     * Some way to present curated lists of information from other sources (e.g., people whose info were referred to during a given project and the creator wants to give credit to)
       * For example, if you created a video game and used a specific YouTuber's videos as a reference, this would be a good way to share the resource with others (as well as help them out by promoting them)
+
+## Considerations
+
+### Images
+All images used in this starter were sourced from [Unsplash](https://unsplash.com/). They provide royalty-free stock images to use in your site (or whatever else you may want to use them for). Be sure to check them out!
