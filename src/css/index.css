@@ -91,6 +91,20 @@
     @apply mx-auto mb-6;
 }
 
+.not-found-image-container {
+    @apply relative flex justify-center;
+}
+.not-found-image {
+    @apply h-auto w-screen;
+}
+.not-found-image-overlay {
+    @apply absolute flex items-center justify-center;
+    @apply bottom-0;
+    @apply bg-black bg-opacity-25;
+    @apply text-gray-300 text-3xl;
+    @apply w-full h-full;
+}
+
 h1 {
     @apply text-5xl;
     @apply font-sans;
