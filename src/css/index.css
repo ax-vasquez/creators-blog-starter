@@ -23,6 +23,11 @@
     @apply block;
     @apply text-center;
     @apply no-underline;
+    @apply bg-gray-300 hover:bg-gray-400;
+    @apply rounded;
+    @apply text-gray-600 hover:text-gray-800;
+    @apply inline-block;
+    @apply p-2;
 }
 
 .nav ul {
@@ -33,10 +38,6 @@
 
 .nav li {
     @apply mx-2;
-    @apply p-2;
-    @apply bg-gray-300 hover:bg-gray-400;
-    @apply rounded;
-    @apply text-gray-600 hover:text-gray-800;
     @apply inline-block;
 }
 
@@ -49,11 +50,26 @@
     @apply hover:text-red-400;
 }
 
+.hero-image-container {
+    @apply relative flex justify-center;
+}
 .hero-image {
     @apply block;
     @apply ml-auto;
     @apply mr-auto;
-    @apply h-80;
+    @apply h-96;
+}
+.hero-image-text {
+    @apply text-center;
+    @apply text-white text-7xl;
+    @apply mt-12 mb-6;
+}
+.hero-image-overlay {
+    @apply absolute flex items-center justify-center;
+    @apply bottom-0;
+    @apply bg-black bg-opacity-75;
+    @apply text-gray-300 text-3xl;
+    @apply w-full h-full;
 }
 
 .home-header {
@@ -80,15 +96,11 @@
     @apply text-gray-300 text-3xl;
 }
 
-.home-greeting-title {
-    @apply text-center;
-    @apply mt-12 mb-6;
-}
 .home-greeting {
     @apply w-9/12;
     @apply text-lg;
     @apply text-justify;
-    @apply mx-auto mb-6;
+    @apply mx-auto my-8;
 }
 
 .not-found-image-container {

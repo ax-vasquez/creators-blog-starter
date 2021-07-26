@@ -35,9 +35,14 @@ const IndexPage = ({ data }) => {
   }) as { src: string, imageData: IGatsbyImageData }[]
   return (
     <Layout>
-        <GatsbyImage image={heroImage} alt="stars" className="hero-image"/>
+        <div className="hero-image-container">
+          <GatsbyImage image={heroImage} alt="stars" className="hero-image"/>
+          <div className="hero-image-overlay">
+            <h1 className="hero-image-text">Hello, I'm Armando</h1>
+          </div>
+        </div>
+        
         <body>
-          <h1 className="home-greeting-title">Hello, I'm Armando</h1>
           <p className="home-greeting">
             Welcome to my headspace! I use this site as my personal blog, as well as my professional portfolio. I'll also occasionally
             write some guides on a variety of topics I'm interested in, such as coding, 3D modeling (and animating), video games, modding,
