@@ -6,6 +6,7 @@
 .layout {
     @apply container;
     @apply mx-auto;
+    @apply h-full;
 }
 
 .nav {
@@ -14,7 +15,7 @@
     @apply bg-gray-100;
     @apply top-0;
     @apply w-screen;
-    @apply z-10;
+    @apply z-20;
     @apply shadow;
 }
 
@@ -23,9 +24,8 @@
     @apply block;
     @apply text-center;
     @apply no-underline;
-    @apply bg-gray-300 hover:bg-gray-400;
-    @apply rounded;
-    @apply text-gray-600 hover:text-gray-800;
+    @apply font-light;
+    @apply text-purple-700 hover:text-purple-900;
     @apply inline-block;
     @apply p-2;
 }
@@ -121,4 +121,59 @@ h1 {
     @apply text-5xl;
     @apply font-sans;
     @apply text-gray-700;
+}
+
+.blog-feed {
+    @apply text-justify;
+    @apply mx-auto my-8;
+}
+.article-row {
+    @apply flex space-x-4;
+    @apply h-auto;
+    @apply bg-gray-100 rounded py-4 md:p-2 sm:p-0;
+    @apply my-2 pr-4;
+    @apply shadow;
+}
+.article-row-thumbnail-container {
+    @apply h-48 w-48 flex flex-wrap content-center;
+    @apply hidden md:inline-block;
+}
+.article-row-thumbnail {
+    @apply h-full w-full;
+}
+.article-row-details {
+    @apply h-auto;
+    @apply w-full;
+    @apply inline-block;
+}
+.article-row-title-line {
+    @apply w-full;
+    @apply inline-block;
+}
+.article-row-title-line h3 {
+    @apply font-extralight;
+    @apply text-4xl;
+    @apply text-purple-700;
+}
+.article-row-title-line p {
+    @apply italic text-gray-600;
+    @apply float-right;
+}
+.article-row-details blockquote {
+    @apply align-middle;
+    @apply text-gray-800 text-opacity-50;
+    @apply my-4 ml-4;
+}
+
+.date-banner {
+    @apply text-center;
+    @apply border-t-2 border-b-2;
+    @apply text-purple-700 text-opacity-50 hover:text-opacity-75;
+    @apply bg-white;
+    @apply my-4;
+    @apply sticky top-16;
+    @apply z-10;
+}
+.date-banner-text {
+    @apply text-xl italic font-light;
 }
