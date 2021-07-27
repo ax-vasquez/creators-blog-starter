@@ -35,8 +35,10 @@ const OPTIONS = {
 export const Navbar = () => (
     <div id="nav" className="nav">
         <ul>
-            {Object.keys(OPTIONS).map(option => <li><Link to={OPTIONS[option].url}>{OPTIONS[option].label}</Link></li>)}
+            {Object.keys(OPTIONS).map(option => <li key={`nav-${OPTIONS[option].label.toLowerCase()}`}><Link to={OPTIONS[option].url}>{OPTIONS[option].label}</Link></li>)}
         </ul>
-        <BiSearchAlt className="nav-search-icon" size={30}/>
+        <div className="nav-search-icon">
+            <BiSearchAlt size={30}/>
+        </div>
     </div>
 )

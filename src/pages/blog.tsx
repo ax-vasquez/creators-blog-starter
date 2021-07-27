@@ -3,6 +3,9 @@ import { graphql } from "gatsby"
 import { Layout } from "../components/Layout"
 import { DateBanner } from "../components/blog/DateBanner"
 import { ArticleRow } from "../components/blog/ArticleRow"
+import { useState } from "react"
+import { FilterModal } from "../components/blog/FilterModal"
+import { useSelector } from "react-redux"
 
 export const query = graphql`
 query{
@@ -20,8 +23,18 @@ query{
             }
             publishDate
             _rawBody
+            categories {
+              title
+            }
           }
         }
+    }
+    allSanityCategory(sort: {order: ASC, fields: title}) {
+      edges {
+        node {
+          title
+        }
+      }
     }
 }
 `
@@ -36,67 +49,89 @@ const MONTHS = {
   '07': 'july',
   '08': 'august',
   '09': 'september',
-  10: 'october',
-  11: 'november',
-  12: 'december'
+  '10': 'october',
+  '11': 'november',
+  '12': 'december'
+}
+
+const getFormattedBannerDateString = (rawDateString: string) => {
+  const parts = rawDateString.split(`-`)
+  const year = parts[0]
+  const month = parts[1]
+  return `${MONTHS[month].toUpperCase()} - ${year}`
 }
 
 const BlogPage = ({ data }) => {
-    const articles = data.allSanityArticle.edges
-    console.log(articles[0].node._rawBody)
+    const [showModal, setShowModal] = useState(false)
+    // TODO: Filter blog feed by categories
+    const activeCategories = useSelector((state: any) => state.blog.activeCategories)
+    // TODO: Filter blog feed by text
+    const filterText = useSelector((state: any) => state.blog.filterText)
+    const articleEdges = data.allSanityArticle.edges
+    const categories = data.allSanityCategory.edges.map(edge => edge.node.title)
+
+    const filteredByText = filterText !== ``
+    const filteredByCategory = activeCategories.length > 0
     return (
         <Layout>
-            <div className="blog-feed">
+            {showModal ? 
+              <div className="flex justify-center">
+                <div className="modal-overlay"/>
+                <FilterModal 
+                  categories={categories}
+                  setHideFilterModal={() => setShowModal(false)}
+                />
+              </div>
+            : null}
+              <div className="blog-feed">
                 {/* <DateBanner dateString={dateString}/> */}
-                {articles.map((article, index) => {
-                  const rowDate = article.node.publishDate
-                  const parts = rowDate.split(`-`)
-                  const year = parts[0]
-                  const month = parts[1]
-                  console.log(month)
-                  console.log(MONTHS)
-                  let currentDateString = `${MONTHS[month].toUpperCase()} - ${year}`
+                {articleEdges.map((edge, index) => {
+                  let displayArticle = true
+                  if (filteredByCategory) {
+                    if (!edge.node.categories.some(cat => activeCategories.includes(cat.title))) displayArticle = false
+                  }
+                  if (filteredByText) {
+                    if (displayArticle) {
+                      if (!(edge.node.title).toLowerCase().includes(filterText.toLowerCase())) displayArticle = false
+                    }
+                  }
+                  let articleJsx: JSX.Element
+                  let dateBannerJsx: JSX.Element
+                  if (displayArticle) {
+                    articleJsx = (
+                      <ArticleRow 
+                        title={edge.node.title}
+                        publishDate={edge.node.publishDate}
+                        // Only pass the first paragraph for "preview"
+                        previewText={edge.node._rawBody[0]}
+                        image={edge.node.image.asset.gatsbyImageData}
+                        slug={edge.node.slug.current}
+                      />
+                    )
+                  }
+                  const rowDate = edge.node.publishDate
+                  let currentDateString = getFormattedBannerDateString(rowDate)
                   let addDateBanner = false
                   if (index > 0) {
-                    const prevRowDate = articles[index - 1].node.publishDate
-                    const prevDateParts = prevRowDate.split(`-`)
-                    const prevYear = prevDateParts[0]
-                    const prevMonth = prevDateParts[1]
-                    const prevDateString = `${MONTHS[prevMonth].toUpperCase()} - ${prevYear}`
+                    const prevRowDate = articleEdges[index - 1].node.publishDate
+                    const prevDateString = getFormattedBannerDateString(prevRowDate)
                     if (prevDateString !== currentDateString) {
                       addDateBanner = true
                     }
                   } else {
                     addDateBanner = true
                   }
-                  let jsx: JSX.Element
+
                   if (addDateBanner) {
-                    jsx = (
-                      <div>
-                        <DateBanner dateString={currentDateString}/>
-                        <ArticleRow 
-                          title={article.node.title}
-                          publishDate={article.node.publishDate}
-                          // Only pass the first paragraph for "preview"
-                          previewText={article.node._rawBody[0]}
-                          image={article.node.image.asset.gatsbyImageData}
-                          slug={article.node.slug.current}
-                        />
-                      </div>
-                    )
-                  } else {
-                    jsx = (
-                      <ArticleRow 
-                        title={article.node.title}
-                        publishDate={article.node.publishDate}
-                        // Only pass the first paragraph for "preview"
-                        previewText={article.node._rawBody[0]}
-                        image={article.node.image.asset.gatsbyImageData}
-                        slug={article.node.slug.current}
-                      />
-                    )
+                    dateBannerJsx = <DateBanner dateString={currentDateString} setShowFilterModal={() => setShowModal(true)}/>
                   }
-                  return jsx
+
+                  return (
+                    <div>
+                      {dateBannerJsx}
+                      {articleJsx}
+                    </div>
+                  )
                 })}
             </div>
         </Layout>
