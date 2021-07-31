@@ -41,7 +41,7 @@ success Writing page-data.json files to public directory - 0.001s - 0/0 0.00/s
     * ~~It will still "look" like it's responding to changes, but it will never actually apply them~~
         * **UPDATE:** This _may_ end up working if you let it run, but it seems to end in an "out of memory" heap error more often than not - it still seems faster to simply stop and restart it, but it no longer appears to be entirely necessary
 
-### GatsbyJS - lazy-loaded images don't all "resolve" to full resolution
+### GatsbyJS - lazy-loaded images don't resolve to full resolution when sourced from the file system
 This started happening after implementing `react-redux`, specifically after adding the `Provider` component to `wrapRootElement` in both the Gatsby SSR and Gatsby Browser files.
 
 Strangely, this doesn't seem to affect all images; just the ones on the home page. The images in the blog feed always seem to update to the full resolution. The only difference between these two image sets is that the blog feed images come from Sanity plugin and the home page images from the local filesystem plugin.
