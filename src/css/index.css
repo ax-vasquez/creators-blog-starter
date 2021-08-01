@@ -112,7 +112,7 @@ h1 {
 
 .blog-feed {
     @apply text-justify;
-    @apply mx-auto my-8;
+    @apply mx-auto;
 }
 .article-row {
     @apply flex space-x-4;
@@ -156,7 +156,7 @@ h1 {
     @apply shadow rounded;
     @apply bg-gray-800;
     @apply my-4;
-    @apply sticky top-16;
+    @apply sticky top-12;
     @apply z-10;
     @apply w-full;
     @apply block text-center;
