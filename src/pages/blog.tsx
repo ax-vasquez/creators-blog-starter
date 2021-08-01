@@ -127,7 +127,7 @@ const BlogPage = ({ data }) => {
                   }
 
                   return (
-                    <div>
+                    <div key={`blog-feed-row-${edge.node.slug.current}`}>
                       {dateBannerJsx}
                       {articleJsx}
                     </div>
