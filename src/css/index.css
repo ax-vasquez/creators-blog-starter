@@ -16,25 +16,15 @@
     @apply w-full;
     @apply z-20;
     @apply shadow;
-    @apply block;
-    /* @apply flex items-center; */
+    @apply text-lg;
+    @apply flex items-center;
 }
 
 .nav a {
-    @apply float-left;
-    @apply block;
     @apply text-center;
     @apply no-underline;
     @apply font-light;
     @apply text-white hover:text-purple-400;
-    @apply inline-block;
-    @apply p-2;
-}
-
-.nav ul {
-    @apply mt-2 mb-2;
-    @apply ml-5;
-    @apply inline-block;
 }
 
 .nav li {
@@ -43,10 +33,8 @@
 }
 
 .nav-search-icon {
-    @apply inline-block align-baseline;
-    @apply float-right;
-    @apply mr-5;
-    @apply text-white hover:text-purple-400;
+    @apply ml-auto my-2 mr-2;
+    @apply stroke-current text-white hover:text-purple-400;
 }
 
 .hero-image-container {

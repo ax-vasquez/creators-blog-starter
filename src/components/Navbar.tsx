@@ -34,7 +34,7 @@ const OPTIONS = {
 
 export const Navbar = () => (
     <div id="nav" className="nav">
-        <ul>
+        <ul className="inline-block">
             {Object.keys(OPTIONS).map(option => <li key={`nav-${OPTIONS[option].label.toLowerCase()}`}><Link to={OPTIONS[option].url}>{OPTIONS[option].label}</Link></li>)}
         </ul>
         <div className="nav-search-icon">
