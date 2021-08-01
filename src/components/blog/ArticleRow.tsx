@@ -2,6 +2,7 @@ import React from 'react'
 import BlockContent from '@sanity/block-content-to-react'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
+import serializers from '../../serializers'
 
 export const ArticleRow = (
     { title, publishDate, image, previewText, slug }: 
@@ -23,7 +24,7 @@ export const ArticleRow = (
                     <p className="inline-block">{publishDate}</p>
                 </div>
                 <blockquote>
-                    <BlockContent blocks={previewText}/>
+                    <BlockContent blocks={previewText} serializers={serializers}/>
                 </blockquote>
             </div>
         </Link>
