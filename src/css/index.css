@@ -9,8 +9,6 @@
     @apply h-full;
 }
 
-
-
 .nav {
     @apply sticky;
     @apply bg-gray-800;
@@ -266,10 +264,19 @@ h1 {
 }
 .article-body ul, ol {
     @apply list-inside;
+    @apply ml-2;
+}
+.article-body div > ul {
+    @apply list-disc;
     @apply my-4;
 }
-.article-body ul {
-    @apply list-disc;
+.article-body div > ul > li > ul  {
+    list-style-type: circle;
+    @apply my-2 ml-4;
+}
+.article-body ul > li > ul {
+    list-style-type: square;
+    @apply my-2 ml-4;
 }
 .article-body ol {
     @apply list-decimal;
