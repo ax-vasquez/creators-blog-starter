@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 
 /**
@@ -22,9 +23,9 @@ const serializers = {
     },
     marks: {
         highlight: ({ children }) => <span className="bg-yellow-200 p-1 rounded">{children}</span>,
-        internalLink: (props) => {
-            console.error(`Sanity internal links are not currently supported in GraphQL-sourced data - convert the internal link to an external link as a temporary workaround`)
-            return <a href={`#`}>{props.children}</a>
+        internalLink: ({ mark, children }) => {
+            const { slug } = mark.reference
+            return <Link to={`/blog/${slug.current}`}>{children}</Link>
           },
         link: ({ mark, children }) => {
             return (

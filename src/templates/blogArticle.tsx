@@ -16,7 +16,7 @@ query($slug: String!){
             }
         }
         publishDate
-        _rawBody
+        _rawBody(resolveReferences: {maxDepth: 4})
         categories {
             title
         }
