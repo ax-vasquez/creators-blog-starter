@@ -11,7 +11,7 @@ import { addActiveCategory, removeActiveCategory } from '../../slices/blogFeedSl
  *                  except in the blog feed filter, where they are inactive until the user toggles them.
  * @returns 
  */
-export const CategoryLabel = ({ 
+export const CategoryFilterLabel = ({ 
     label, 
 }: { 
     label: string, 
