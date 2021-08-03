@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFilterText } from '../../slices/blogFeedSlice'
-import { CategoryLabel } from './CategoryLabel'
+import { CategoryFilterLabel } from './CategoryFilterLabel'
 
 export const FilterModal = ({ 
     categories,
@@ -35,8 +35,8 @@ export const FilterModal = ({
                     onClick={() => dispatch(setFilterText(``))}
                 >clear text</button>
             </div>
-            <div className="modal-category-grid">
-                {categories.map(cat => <CategoryLabel label={cat}/>)}
+            <div className="category-grid">
+                {categories.map(cat => <CategoryFilterLabel label={cat}/>)}
             </div>
             <div className="modal-footer">
                 <p>

@@ -47,3 +47,12 @@ This started happening after implementing `react-redux`, specifically after addi
 Strangely, this doesn't seem to affect all images; just the ones on the home page. The images in the blog feed always seem to update to the full resolution. The only difference between these two image sets is that the blog feed images come from Sanity plugin and the home page images from the local filesystem plugin.
 
 **UPDATE:** This _does_ appear to work, albeit after a significant delay. I left the home page up for a couple of minutes, after which the images finally resolved to the full-res versions. _It seems that the issue is simply that locally-sourced images will take a long time to finish loading, at least when it comes to local development; this is untested on a build as of yet._
+
+### Sanity - Internal link serialization doesn't expose slug data for related records
+According to the Sanity documentation, we should be able to get a slug to the internal document using `const {slug = {}} = props.mark`. However, it seems this only works if you query the data using GROQ. Since Gatsby sites are sourced using GraphQL, and since the Sanity GraphQL API doesn't appear to return the correct data for the `@sanity/block-content-to-react`, **it doesn't currently appear to be possible to use serializers to setup internal links for a Gatsby site**.
+* Gatsby nodes are sourced using GraphQL queries during the site build process
+    * Unless there is some way to "inject" GROQ data, internal links can only be supported by adding them as "external" links (you'll need to provide the full URL to the would-be page location in the article)
+
+As it currently stands, we can only get the internal ID of the reference. We may be able to use this by querying the data using GROQ when the user accesses the page, but this is not ideal:
+* It's an extra step to render the page
+* It would require developers to understand both GraphQL and GROQ (plus how/why you need to use one versus the other - not easy to do if unfamiliar with Sanity)

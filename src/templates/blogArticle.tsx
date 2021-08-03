@@ -4,6 +4,7 @@ import { Layout } from "../components/Layout"
 import { GatsbyImage } from 'gatsby-plugin-image'
 import BlockContent from '@sanity/block-content-to-react'
 import serializers from '../serializers'
+import { EmbeddedCategoryFilterLabel } from '../components/blog/EmbeddedCategoryLabel'
 
 export const query = graphql`
 query($slug: String!){
@@ -40,10 +41,19 @@ const BlogArticle = ({ pageContext, data }) => {
             <div className="article">
                 <div className="article-detail">
                     <h1>{title}</h1>
-                    <p>{publishDate}</p>
+                    <p className="mt-2">{publishDate}</p>
+                        {categories.length > 0 ? 
+                            <div className="embedded-category-grid">
+                                {categories.map(cat => (
+                                    <div key={`embedded-category-${cat.title}`}>
+                                        <EmbeddedCategoryFilterLabel label={cat.title}/>
+                                    </div>
+                                ))}
+                            </div>
+                        : null }
                 </div>
                 <div className="article-body">
-                    <BlockContent blocks={_rawBody} serializers={serializers}/>
+                    <BlockContent className={`block-content`} blocks={_rawBody} serializers={serializers}/>
                 </div>
             </div>
         </Layout>
