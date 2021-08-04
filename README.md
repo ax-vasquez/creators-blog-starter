@@ -3,11 +3,12 @@
 Just another Gatsby blog starter.
 
 ## To do
-1. [x] Blog feed
-   * [ ] Article page
-2. [ ] Bio pages
-3. [ ] Project overview page
+1. [ ] Bio pages
+2. [ ] Project overview page
     * [ ] Project info modal
+3. [ ] E2E Tests
+4. [ ] Component Tests
+5. [ ] Unit Tests
 
 ## In the future...
 1. **Documentation sub-system**
