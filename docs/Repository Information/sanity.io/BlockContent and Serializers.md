@@ -27,3 +27,23 @@ There is no need to manually process **any** of the body content because `BlockC
 4. `marks.link` - Tells `BlockContent` what to do when an internal link is encountered
 
 > NOTE: Don't leave empty, yet supported, fields in the serializers object. For example, `list` is a supported field on a serializer object for Sanity, but if you were have this in your serializer object while set to `{}`, your site will not build (and the error isn't really clear). I assume the same goes for any other supported field in serializers. **TL;DR: only add what you need to the serializers object**
+
+### Generating unique `key` fields on child blocks
+By default, if you have a Block Content field with several child blocks, none of the child blocks will be assigned a unique `key`. This will lead to errors in the console saying that child elements need to have a unique `key` identifier.
+
+Fortunately, this is pretty easy to fix using serializers. Simply add a `container` field to the serializer object and define it like so:
+```ts
+const serializer = {
+    container: ({ children }) => {
+        return (
+            children.map(block => {
+                return (<div key={`${block.key}`}>{block}</div>)
+            })
+        )
+    },
+    // Rest of the serializer...
+}
+```
+* `container` is a top-level field in the `serializer` object
+* This simply wraps each child block in a `div` and gives it the `key` value from the given block (each of which is a unique identifier, provided by Sanity)
+    * *Room for improvement: we could make these keys more readable, but it may not be a big deal*
