@@ -18,6 +18,13 @@ The "Repository Information" directory contains documentation about the implemen
             * It's also used whenever you need to use any of the Gatsby Browser APIs
 2. [`gatsby-config.js`](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/)
     * The central configuration file for a Gatsby site
+3. [`gatsby-node.js`](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/)
+    * A code file that's run once during your site's build process
+    * You can use the Gatsby Node APIs to create pages dynamically, as we do in this repo for blog posts
+4. [`gatsby-ssr.js`](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-ssr/)
+    * SSR: "Server Side Rendering"
+    * Gatbsy SSR APIs allow you to alter the content of static HTML files as they are being server-side rendered
+    * We use this to wrap the root element with the Redux provider (we also do this in in `gatsby-browser` - the Provider is required in both locations)
 3. `package.json`
 4. [`postcss.config.js`](https://github.com/postcss/postcss)
 5. [`tailwind.config.js`](https://tailwindcss.com/docs/theme)
