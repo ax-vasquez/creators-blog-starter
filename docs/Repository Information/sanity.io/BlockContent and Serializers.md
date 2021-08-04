@@ -47,3 +47,42 @@ const serializer = {
 * `container` is a top-level field in the `serializer` object
 * This simply wraps each child block in a `div` and gives it the `key` value from the given block (each of which is a unique identifier, provided by Sanity)
     * *Room for improvement: we could make these keys more readable, but it may not be a big deal*
+
+### Handling internal links
+When choosing how to handle internal links, you pretty much only need to consider whether or not you'd like to open the link in the current window, or a new tab. 
+
+**When opening in the current window...** you should leverage the Gatsby `Link` API, which utilizes the site cache to link you to the target location way faster than a simple `<a>` ever could. If you don't need to preserve the user's location in the original document, then you should always use Gatsby `Link` (something, something "blazing fast"...). _The only reason you **wouldn't** want to do this is if you need the link to open in a new tab._
+
+**When opening in a new tab...** you should just use an `<a>` tag and set `target` to `"_blank"` - this sets the link to open in a new tab, thus preserving the user's location where the link is located. _Only do this for links that you need to open in a new tab._
+
+#### What `creators-blog` does
+This Gatsby site uses Gatsby `Link` for internal links. This makes it so that you can link articles together in the Sanity studio and have the articles be linked in the Gatsby site, _and_ do so by leveraging Gatsby's crazy-fast site cache.
+
+Here is our serializer for internal links:
+```ts
+const serializer = {
+    // Rest of the serializer...
+    marks: {
+        // Other marks...
+        internalLink: ({ mark, children }) => {
+            const { slug } = mark.reference
+            return <Link to={`/blog/${slug.current}`}>{children}</Link>
+        },
+    },
+    // Rest of the serializer...
+}
+```
+* Internal links from sanity are sent through their API as `internalLink` within the `marks` field (along with `link` and `highlight`, among others)
+* We destructure the `props` field since we only need `mark` and `children`
+    * We then pull the value for `slug` out of `mark.reference`
+    * From there, it's just a matter of setting up a rather "plain" Gatsby `Link`
+
+##### But wait... `slug` is undefined!
+This is a bit of a tricky part - first and foremost, _it's not a bug_. The issue is that, by default, references are not resolved in the GraphQL queries for `gatsby-source-sanity`. To fix this, locate wherever you are querying for the raw data in question and alter it so it looks something like the following:
+```graphql
+_rawBody(resolveReferences: {maxDepth: 4})
+```
+
+**GOTCHA!** It seems there isn't really an easy way to control the size of the data queried on the reference. It pretty much seems to be an "all or nothing" approach. Unfortunately, this can potentially result in very large page sizes. Some users have reported a single page size in excess of 4MB... This is certainly a limitation and something to keep in mind when setting up internal links in your content.
+* The simplest way to avoid over-inflated page sizes seems to simply be to not have many references
+* https://github.com/sanity-io/gatsby-source-sanity/issues/86
